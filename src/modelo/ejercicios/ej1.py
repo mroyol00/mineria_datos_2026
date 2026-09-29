@@ -1,15 +1,17 @@
-#Ej1-a
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-def ejercicio_1(spark):
-    #Ej1-a
+
+
+def ejercicio_1(spark, ruta_csv):
+    # Ej1-a
     print("Ej1-a")
 
     df = (
         spark.read.option("header", True)
         .option("sep", ";")
-        .csv("ibex35_close-2024.csv")
+        .csv(ruta_csv)
     )
+    df_raw = df  # copia de los datos completos tal cual vienen del CSV (para guardarlos en MySQL)
 
     df.printSchema()
 
@@ -19,16 +21,15 @@ def ejercicio_1(spark):
         if c != "Fecha":
             df_converted = df_converted.withColumn(c, col(f"`{c}`").cast("float"))
 
-    df_converted.printSchema()  
+    df_converted.printSchema()
     df_converted.show(6)
 
-    #Ej1-b
+    # Ej1-b
     print("Ej1-b")
     for c in df_converted.columns:
         if c.endswith(".MC"):
             nuevo = c.replace(".MC", "")
             df_converted = df_converted.withColumnRenamed(c, nuevo)
 
-
     df_converted.show(6)
-    return df_converted
+    return df_raw, df_converted
