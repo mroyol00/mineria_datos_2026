@@ -11,6 +11,7 @@ def ejercicio_4(df):
     datos = []
     for e in empresas:
         con_dato = df_orden.filter(col(e).isNotNull())
+        #necesité IA para la construcción de la estsructura (1)[0][e]
         inicial = con_dato.head(1)[0][e]
         final = con_dato.tail(1)[0][e]
         datos.append((e, float(inicial), float(final)))
@@ -28,3 +29,5 @@ def ejercicio_4(df):
         .when(col("Variación Anual") < 15, "Subida")
         .otherwise("Subida Fuerte")
     )  
+    variaciones.show(36)
+    return df

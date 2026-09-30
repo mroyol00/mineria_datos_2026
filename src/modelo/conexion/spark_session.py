@@ -6,7 +6,7 @@ RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..")
 
 
 def crear_sesion_spark():
-    # Ruta relativa al .jar del conector (carpeta lib), valida en cualquier ordenador
+    
     jars = glob.glob(os.path.join(RAIZ, "lib", "mysql-connector*.jar"))
     if not jars:
         raise FileNotFoundError(f"No hay ningun mysql-connector*.jar en {os.path.join(RAIZ, 'lib')}")

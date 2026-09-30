@@ -30,7 +30,7 @@ def ejercicio_2(df):
 
     print(f"Periodo: {fecha_min} a {fecha_max}")
     print(f"Dias con informacion disponible: {dias_disponibles}")
-    print("Es coherente: la bolsa no abre findes ni festivos, por eso hay menos dias que dias naturales en el año.")
-    print("No es necesario buscar datos adicionales, el periodo cubre un año completo de cotizacion.")
+    print("Es coherente: la bolsa no abre findes ni festivos.")
+    print("No es necesario buscar datos adicionales")
 
     return df_ej2
