@@ -2,7 +2,9 @@ from pyspark.sql.functions import *
 from pyspark.sql.types import *
 
 
-def ejercicio_1(spark, ruta_csv):
+def ejercicio_1(conexion, ruta_csv):
+    spark = conexion.spark
+
     # Ej1-a
     print("Ej1-a")
 
@@ -14,7 +16,7 @@ def ejercicio_1(spark, ruta_csv):
     df_raw = df 
     df.printSchema()
     df_converted = df.withColumn("Fecha", to_date(col("Fecha"), "dd/MM/yyyy"))
-    #Necesité ayuda de IA para las comillas inversas (f"`{c}`")
+
     for c in df_converted.columns:
         if c != "Fecha":
             df_converted = df_converted.withColumn(c, col(f"`{c}`").cast("float"))
@@ -23,7 +25,6 @@ def ejercicio_1(spark, ruta_csv):
     df_converted.show(6)
 
     # Ej1-b
-    #necesité ayuda de IA para quitar el .MC
     print("Ej1-b")
     for c in df_converted.columns:
         if c.endswith(".MC"):
